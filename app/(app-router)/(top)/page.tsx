@@ -1,5 +1,6 @@
-import NewsList from "../ui/top/NewsList";
-import ImageMap from "../ui/top/ImageMap";
+import NewsList from "../../components/ui/top/NewsList";
+import ImageMap from "../../components/ui/top/ImageMap";
+import LoginBtn from "@/app/components/LoginBtn";
 
 export default function Home() {
     return (
@@ -19,6 +20,9 @@ export default function Home() {
                     <ImageMap title="最新の活動" image="/images/top/activity.png" link="/activity" />
                 </div>
             </aside>
+
+            <LoginBtn />
+
         </div>
     );
 }

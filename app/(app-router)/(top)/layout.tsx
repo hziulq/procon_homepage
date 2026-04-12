@@ -1,6 +1,6 @@
-import Header from "../ui/Header";
-import Footer from "../ui/Footer";
-import NavigationBar from "../ui/NavigationBar";
+import Header from "../../components/ui/Header";
+import Footer from "../../components/ui/Footer";
+import NavigationBar from "../../components/ui/NavigationBar";
 
 export default function RootLayout({
   children,
