@@ -1,7 +1,7 @@
 export default function NewsViewPage() {
     return (
         <div>
-            <h1>News View Page</h1>
+            <h2>News View Page</h2>
         </div>
     );
 }
