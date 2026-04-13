@@ -25,11 +25,14 @@ export const authOptions: NextAuthOptions = { // ここに型を指定
             if (account) {
                 token.accessToken = account.access_token;
             }
+
+            console.log("profile", profile, profile?.sub)
+            console.log("account", account)
             if (profile && profile.sub) {
                 const hashedId = hashUserId(profile.sub);
 
                 try {
-                    const res = await fetch(`${process.env.INTERNAL_API_URL}/api/auth/getid`, {
+                    const res = await fetch(`${process.env.INTERNAL_API_URL}/api/hashed_id/getid`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -41,11 +44,12 @@ export const authOptions: NextAuthOptions = { // ここに型を指定
                     });
                     if (res.ok) {
                         const data = await res.json();
+                        console.log("data", data)
                         token.id = data.user_id;
                     }
 
                     if (res.status === 404) {
-                        const res = await fetch(`${process.env.INTERNAL_API_URL}/api/auth/register`, {
+                        const res = await fetch(`${process.env.INTERNAL_API_URL}/api/hashed_id/register`, {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -68,6 +72,7 @@ export const authOptions: NextAuthOptions = { // ここに型を指定
                 }
 
             }
+            console.log("token", token)
             return token;
         },
         // 2. セッションが参照された時に実行
@@ -76,6 +81,7 @@ export const authOptions: NextAuthOptions = { // ここに型を指定
             // session.accessToken = token.accessToken as string;
 
             // 必要に応じて、セッションにIDを追加
+            console.log("token.id", token.id)
             session.user.id = token.id as string;
             return session;
         },
