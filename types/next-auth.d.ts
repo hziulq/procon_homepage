@@ -1,6 +1,5 @@
 // types/next-auth.d.ts
-import NextAuth, { DefaultSession } from "next-auth" // 1. DefaultSessionを明示的にインポート
-import { JWT } from "next-auth/jwt"
+import { DefaultSession } from "next-auth" // 1. DefaultSessionを明示的にインポート
 
 declare module "next-auth" {
     interface Session {

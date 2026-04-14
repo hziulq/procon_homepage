@@ -1,10 +1,9 @@
-// app/api/auth/[...nextauth]/route.ts
-import NextAuth, { NextAuthOptions } from "next-auth"; // 型をインポート
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { hashUserId } from "@/app/lib/crypt";
+import { fetchInternalEndpoint } from "@/app/lib/fetch-internal-endpoint";
 
-
-export const authOptions: NextAuthOptions = { // ここに型を指定
+export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -15,74 +14,63 @@ export const authOptions: NextAuthOptions = { // ここに型を指定
         // ドメイン制限: 指定されたドメインのメールアドレスのみログインを許可する
         async signIn({ user }) {
             const allowedDomain = process.env.GOOGLE_ALLOWED_DOMAIN!;
-            if (user.email && user.email.endsWith(allowedDomain)) {
-                return true;
-            }
-            return false; // それ以外のドメインはログインを拒否
+            return !!(user.email && user.email.endsWith(allowedDomain));
         },
+
         // 1. JWTが作成・更新された時に実行（トークンを保管する）
         async jwt({ token, account, profile }) {
             if (account) {
                 token.accessToken = account.access_token;
             }
 
-            console.log("profile", profile, profile?.sub)
-            console.log("account", account)
             if (profile && profile.sub) {
                 const hashedId = hashUserId(profile.sub);
 
                 try {
-                    const res = await fetch(`${process.env.INTERNAL_API_URL}/api/hashed_id/getid`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${process.env.INTERNAL_API_SECRET}`,
-                        },
-                        body: JSON.stringify({
-                            hashed_id: hashedId,
-                        }),
+                    // ID取得処理
+                    const getRes = await fetchInternalEndpoint("POST", "/api/hashed_id/getid", {
+                        hashed_id: hashedId,
                     });
-                    if (res.ok) {
-                        const data = await res.json();
-                        console.log("data", data)
-                        token.id = data.user_id;
-                    }
 
-                    if (res.status === 404) {
-                        const res = await fetch(`${process.env.INTERNAL_API_URL}/api/hashed_id/register`, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${process.env.INTERNAL_API_SECRET}`,
-                            },
-                            body: JSON.stringify({
-                                hashed_id: hashedId,
-                                name: profile.name,
-                                email: profile.email,
-                            }),
+                    if (getRes.ok) {
+                        const data = await getRes.json();
+                        token.id = data.user_id;
+                    } else if (getRes.status === 404) {
+                        // 未登録の場合は登録処理を行う
+                        const regRes = await fetchInternalEndpoint("POST", "/api/hashed_id/register", {
+                            hashed_id: hashedId,
+                            name: profile.name,
+                            email: profile.email,
                         });
 
-                        if (res.ok) {
-                            const data = await res.json();
+                        if (regRes.ok) {
+                            const data = await regRes.json();
                             token.id = data.user_id;
+                        } else {
+                            console.error("Failed to register user:", await regRes.text());
                         }
+                    } else {
+                        console.error("Failed to fetch user ID:", await getRes.text());
                     }
                 } catch (error) {
-                    console.error("Error fetching user ID:", error);
+                    console.error("Error communicating with internal API:", error);
                 }
-
             }
-            console.log("token", token)
+
+            if (process.env.NODE_ENV === "development") {
+                console.log("[NextAuth JWT Callback] Token updated", { id: token.id });
+            }
+
             return token;
         },
+
         // 2. セッションが参照された時に実行
         async session({ session, token }) {
-            // 必要に応じて、セッションにアクセストークンを追加
+            // 必要に応じて、セッションにアクセストークンやIDを追加
             // session.accessToken = token.accessToken as string;
-
-            // 必要に応じて、セッションにIDを追加
-            console.log("token.id", token.id)
-            session.user.id = token.id as string;
+            if (token.id) {
+                session.user.id = token.id as string;
+            }
             return session;
         },
     },
