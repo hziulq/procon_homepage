@@ -12,7 +12,7 @@ export async function fetchInternalEndpoint(method: string, endpoint: string, bo
         console.log("method", method);
     }
 
-    const bearerToken = method === "POST" ? process.env.INTERNAL_API_SECRET : "";
+    const bearerToken = method === "POST" ? process.env.INTERNAL_API_SECRET : "no bearer token";
 
     return fetch(`${process.env.INTERNAL_API_URL}${endpoint}`, {
         method: method,

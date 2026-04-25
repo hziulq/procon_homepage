@@ -5,7 +5,11 @@ import { NewsListSchema } from "@/types/news";
 export default async function NewsPage() {
 
     const res = await fetchInternalEndpoint("GET", "/news");
-    const newsData = NewsListSchema.parse(await res.json());
+    const newsData = NewsListSchema.safeParse(await res.json());
+
+    if (!newsData.success) {
+        return <div>Error</div>;
+    }
 
     if (process.env.NODE_ENV === "development") {
         console.log("newsData", newsData);
