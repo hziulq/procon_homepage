@@ -43,3 +43,6 @@ next-env.d.ts
 #public
 /public/images
 .vercel
+
+#vscode
+.vscode

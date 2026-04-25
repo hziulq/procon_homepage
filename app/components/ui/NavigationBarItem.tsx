@@ -8,12 +8,13 @@ export default function NavigationBarItem(props: { title: string, url: string })
     const isActive = pathname === props.url;
 
     return (
-        <li className="flex-1 text-center border-b border-gray-200 dark:border-gray-700">
-            <Link href={props.url}>
-                <div className={`py-2 transition-colors ${isActive
-                    ? "bg-gray-200 dark:bg-gray-700 font-bold text-blue-600 dark:text-blue-400"
-                    : "text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800"
-                    }`}>
+        <li className="flex-1 text-center">
+            <Link href={props.url} className="block w-full outline-none">
+                <div className={`py-3 px-4 rounded-xl transition-all duration-300 ease-in-out backdrop-blur-md border border-transparent ${
+                    isActive
+                        ? "bg-white/40 text-gray-900 font-extrabold shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] border-white/50 scale-105"
+                        : "text-gray-800 font-medium hover:bg-white/30 hover:text-black hover:-translate-y-1 hover:shadow-lg hover:border-white/40"
+                }`}>
                     {props.title}
                 </div>
             </Link>

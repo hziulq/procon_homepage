@@ -4,20 +4,19 @@ import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function LoginBtn() {
     const { data: session } = useSession()
-    console.log(session);
-
-    if (session) {
-        return (
-            <>
-                Signed in as {session.user?.email} <br />
-                <button onClick={() => signOut()}>Sign out</button>
-            </>
-        )
+    if (process.env.NODE_ENV === "development") {
+        console.log("session", session);
     }
+
+    const signedInMessage = session ? "Signed in as " + session.user?.email : "Not signed in";
+    const buttonText = session ? "Sign out" : "Sign in";
+    const buttonAction = session ? () => signOut() : () => signIn();
+
     return (
-        <>
-            Not signed in <br />
-            <button onClick={() => signIn()}>Sign in</button>
-        </>
+        <div className="flex flex-col">
+            <p className="text-white">{signedInMessage}</p>
+            <button className="text-white" onClick={buttonAction}>{buttonText}</button>
+        </div>
     )
+
 }

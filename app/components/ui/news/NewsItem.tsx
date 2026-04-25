@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function NewsItem(props: { title: string, date: string, url: string }) {
+export default function NewsItem(props: { title: string, created_at: string, url: string }) {
     return (
         <li>
             <Link href={props.url}>
@@ -8,7 +8,7 @@ export default function NewsItem(props: { title: string, date: string, url: stri
                     <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2">
                         {props.title}
                     </h2>
-                    <p className="text-gray-600 dark:text-gray-300">{props.date}</p>
+                    <p className="text-gray-600 dark:text-gray-300">{props.created_at}</p>
                 </div>
             </Link>
         </li>
