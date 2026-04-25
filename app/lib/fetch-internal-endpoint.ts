@@ -12,17 +12,7 @@ export async function fetchInternalEndpoint(method: string, endpoint: string, bo
         console.log("method", method);
     }
 
-    if (!process.env.INTERNAL_API_URL) {
-        throw new Error("INTERNAL_API_URL is not defined");
-    }
-
-    const bearerToken = method === "POST" ? process.env.INTERNAL_API_SECRET : process.env.INTERNAL_API_GET;
-
-    if (!bearerToken) {
-        throw new Error("BEARER_TOKEN is not defined");
-    }
-
-
+    const bearerToken = method === "POST" ? process.env.INTERNAL_API_SECRET : "";
 
     return fetch(`${process.env.INTERNAL_API_URL}${endpoint}`, {
         method: method,
