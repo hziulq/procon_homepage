@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Create Next App",
-  description: "",
+  title: process.env.TITLE || "",
+  description: process.env.DESCRIPTION || "",
 };
 
 const backgroundImageUrl = process.env.BACKGROUND_IMAGE_URL || "/images/background1.png";

@@ -5,6 +5,7 @@ export const NewsSchema = z.object({
     title: z.string(),
     created_at: z.string(),
     content_url: z.string(),
+    content: z.string(),
 });
 
 export type News = z.infer<typeof NewsSchema>;

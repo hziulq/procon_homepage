@@ -12,15 +12,23 @@ export async function fetchInternalEndpoint(method: string, endpoint: string, bo
         console.log("method", method);
     }
 
-    const bearerToken = method === "POST" ? process.env.INTERNAL_API_SECRET : "no bearer token";
+    const apiUrl = process.env.NODE_ENV === "development" ? process.env.DEV_INTERNAL_API_URL : process.env.INTERNAL_API_URL;
 
-    return fetch(`${process.env.INTERNAL_API_URL}${endpoint}`, {
+    if (!process.env.INTERNAL_API_SECRET) {
+        throw new Error("INTERNAL_API_SECRET is not defined");
+    }
+
+    const bearerToken = process.env.INTERNAL_API_SECRET;
+    const bypassSecret = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
+
+    return fetch(`${apiUrl}${endpoint}`, {
         method: method,
         headers: {
+            "x-vercel-protection-bypass": bypassSecret || "",
             "Content-Type": "application/json",
             "Authorization": `Bearer ${bearerToken}`,
         },
-        body: JSON.stringify(body),
+        body: body ? JSON.stringify(body) : undefined,
     });
 }
 
