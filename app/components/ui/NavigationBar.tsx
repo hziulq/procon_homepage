@@ -8,10 +8,10 @@ export default function NavigationBar() {
                     <NavigationBarItem title="TOP" url="/" />
                     <NavigationBarItem title="概要" url="/about" />
                     <NavigationBarItem title="ニュース" url="/articles" />
-                    <NavigationBarItem title="部員" url="/members" />
-                    <NavigationBarItem title="スペシャル" url="/specials" />
-                    <NavigationBarItem title="アクセス" url="/access" />
-                    <NavigationBarItem title="コンタクト" url="/contact" />
+                    {/* <NavigationBarItem title="部員" url="/members" /> */}
+                    {/* <NavigationBarItem title="スペシャル" url="/specials" /> */}
+                    {/* <NavigationBarItem title="アクセス" url="/access" /> */}
+                    {/* <NavigationBarItem title="コンタクト" url="/contact" /> */}
                 </ul>
             </nav>
         </div>

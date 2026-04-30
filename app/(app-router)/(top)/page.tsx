@@ -43,7 +43,7 @@ export default async function Home() {
             <aside className="w-full md:w-80 rounded-xl bg-black/5 p-6 dark:bg-white/5 shadow-sm">
                 <div className="flex flex-col gap-4">
                     <ImageMap title="コンタクト" image="/images/contact.png" link="/contact" />
-                    <ImageMap title="プロダクト" image="/images/product.png" link="/product" />
+                    {/* <ImageMap title="プロダクト" image="/images/product.png" link="/product" /> */}
                     <ImageMap title="リクルート" image="/images/recruit.png" link="/recruit" />
                 </div>
             </aside>

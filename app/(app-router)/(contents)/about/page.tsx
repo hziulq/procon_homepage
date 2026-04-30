@@ -39,7 +39,7 @@ export default async function AboutPage() {
 
     return (
         <div className="flex flex-col gap-6">
-            <h2 className="text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300 border-b border-white/10 pb-4">概要</h2>
+            {/* <h2 className="text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300 border-b border-white/10 pb-4">概要</h2> */}
             <div
                 id="content-container"
                 className="text-slate-200 leading-relaxed"

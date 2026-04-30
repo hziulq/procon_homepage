@@ -14,8 +14,8 @@ export default function LoginBtn() {
 
     return (
         <div className="flex flex-col">
-            <p className="text-white">{signedInMessage}</p>
-            <button className="text-white" onClick={buttonAction}>{buttonText}</button>
+            {/* <p className="text-white">{signedInMessage}</p> */}
+            {/* <button className="text-white" onClick={buttonAction}>{buttonText}</button> */}
         </div>
     )
 

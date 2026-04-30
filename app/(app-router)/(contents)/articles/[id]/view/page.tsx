@@ -28,7 +28,12 @@ export default async function articlesViewPage({ params }: { params: Promise<{ i
 
     return (
         <article className="flex flex-col">
-            <header className="mb-10 border-b border-white/10 pb-8 mt-4">
+            <div
+                id="content-container"
+                className="text-slate-200 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: safehtmlContent }}
+            />
+            <footer className="mt-10 border-white/10 border-t pt-8 mt-4">
                 {/* <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-indigo-400 mb-6">{articles.title}</h1> */}
                 <div className="flex items-center gap-2 text-slate-400 font-medium">
                     <span className="bg-slate-800/50 border border-slate-700/50 px-3 py-1.5 rounded-full text-sm flex items-center shadow-inner tracking-wider">
@@ -36,12 +41,7 @@ export default async function articlesViewPage({ params }: { params: Promise<{ i
                         {articles.created_at.split("T")[0]} 作成
                     </span>
                 </div>
-            </header>
-            <div
-                id="content-container"
-                className="text-slate-200 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: safehtmlContent }}
-            />
+            </footer>
         </article>
     );
 }
