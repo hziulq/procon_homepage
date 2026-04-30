@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+#content-container h1 {
+    @apply text-3xl md:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-400 mb-6 mt-8;
+}
+
+#content-container h2 {
+    @apply text-2xl md:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300 border-b border-white/10 pb-3 mb-5 mt-10;
+}
+
+#content-container h3 {
+    @apply text-xl md:text-2xl font-bold text-slate-100 mb-4 mt-8;
+}
+
+#content-container h4 {
+    @apply text-lg md:text-xl font-bold text-slate-200 mb-3 mt-6;
+}
+
+#content-container h5 {
+    @apply text-base md:text-lg font-bold text-slate-200 mb-2 mt-4;
+}
+
+#content-container h6 {
+    @apply text-sm md:text-base font-bold text-slate-300 mb-2 mt-4;
+}
+
+#content-container p {
+    @apply text-slate-300 leading-relaxed mb-5;
+}
+
+#content-container a {
+    @apply text-blue-400 hover:text-blue-300 hover:underline transition-colors duration-300;
+}
+
+#content-container ul {
+    @apply list-disc list-outside text-slate-300 mb-5 ml-6 space-y-2 marker:text-blue-400;
+}
+
+#content-container ol {
+    @apply list-decimal list-outside text-slate-300 mb-5 ml-6 space-y-2 marker:text-blue-400;
+}
+
+#content-container li {
+    @apply leading-relaxed;
+}
+
+#content-container li>ul,
+#content-container li>ol {
+    @apply mt-2 mb-0;
+}
+
+#content-container blockquote {
+    @apply border-l-4 border-blue-500/50 bg-slate-800/30 backdrop-blur-sm p-4 rounded-r-2xl my-6 text-slate-300 italic shadow-inner;
+}
+
+#content-container hr {
+    @apply border-t border-white/10 my-8;
+}
+
+#content-container img {
+    @apply rounded-2xl shadow-[0_8px_32px_0_#00000080] my-8 max-w-full h-auto border border-white/5 hover:scale-105 transition-all duration-700 block;
+}
+
+#content-container strong,
+#content-container b {
+    @apply font-bold text-slate-100;
+}
+
+#content-container em,
+#content-container i {
+    @apply italic text-slate-300;
+}
+
+#content-container del {
+    @apply line-through text-slate-500;
+}

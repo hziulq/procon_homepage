@@ -1,9 +1,8 @@
 export default function MembersPage() {
     return (
-        <>
-            <main className="w-full md:max-w-7xl md:mx-auto rounded-xl bg-black/5 p-6 dark:bg-white/5 shadow-sm">
-                <h2>部員紹介</h2>
-            </main>
-        </>
+        <div className="flex flex-col gap-6">
+            <h2 className="text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300 border-b border-white/10 pb-4">部員紹介</h2>
+            {/* メンバーコンテンツがここに入ります */}
+        </div>
     );
 }

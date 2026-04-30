@@ -1,4 +1,4 @@
-import { NewsItemSkeleton } from "@/app/components/ui/news/NewsItem";
+import { ArticlesItemSkeleton } from "@/app/components/ui/articles/ArticlesItem";
 
 export default function Loading() {
     return (
@@ -7,7 +7,7 @@ export default function Loading() {
             <ul>
                 {/*skeleton list*/}
                 {[...Array(5)].map((_, i) => (
-                    <NewsItemSkeleton key={i} />
+                    <ArticlesItemSkeleton key={i} />
                 ))}
             </ul>
         </>

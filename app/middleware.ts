@@ -1,6 +1,7 @@
 // middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import DevLog from './lib/dev-log';
 
 /**
  * ミドルウェア
@@ -9,8 +10,6 @@ import type { NextRequest } from 'next/server';
  */
 export function middleware(request: NextRequest) {
     // ここで request を解析して処理を書く
-    if (process.env.NODE_ENV === "development") {
-        console.log("request", request.url);
-    }
+    DevLog(`middleware: ${request.url}`);
     return NextResponse.next(); // 何もせず次に進む
 }
