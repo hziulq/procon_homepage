@@ -1,6 +1,7 @@
 import { fetchInternalEndpoint } from "@/app/lib/fetch-internal-endpoint";
-import { NewsSchema } from "@/types/news";
+import { NewsContentSchema } from "@/types/news";
 import DevLog from "@/app/lib/dev-log";
+import convertToHtml from "@/app/lib/convert-to-html";
 
 export default async function NewsViewPage({ params }: { params: Promise<{ id: string }> }) {
 
@@ -14,22 +15,21 @@ export default async function NewsViewPage({ params }: { params: Promise<{ id: s
         return <div>サーバ側でエラーが起きました。</div>;
     }
 
-    const newsData = NewsSchema.safeParse(await response.json());
-    DevLog(`newsData:`, newsData);
+    const newsData = NewsContentSchema.safeParse(await response.json());
+    DevLog(`newsData:`, newsData.data);
 
     if (!newsData.success) {
         return <div>サーバ側でエラーが起きました。</div>;
     }
 
     const news = newsData.data;
+    const safehtmlContent = await convertToHtml(news.content);
 
     return (
-        <main className="flex justify-center">
-            <div className="w-full md:max-w-7xl bg-black/40 p-10 mt-5 rounded-2xl">
-                <h1 className="pb-10 pt-3 text-2xl font-bold">{news.title || "News View Page"}</h1>
-                <p>{news.created_at || "News View Page"}</p>
-                <div>{news.content || "News View Page"}</div>
-            </div>
-        </main>
+        <>
+            <h1 className="pb-10 pt-3 text-2xl font-bold">{news.title}</h1>
+            <p className="font-medium">投稿日: {news.created_at.split("T")[0]}</p>
+            <div dangerouslySetInnerHTML={{ __html: safehtmlContent }} />
+        </>
     );
 }

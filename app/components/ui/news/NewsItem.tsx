@@ -14,3 +14,16 @@ export default function NewsItem(props: { title: string, created_at: string, url
         </li>
     );
 }
+
+export function NewsItemSkeleton() {
+    return (
+        <li>
+            <div className="flex flex-col bg-white dark:bg-black/20 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 animate-pulse">
+                <div className="mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+                    <div className="h-7 bg-black/10 dark:bg-white/10 rounded-md w-3/4"></div>
+                </div>
+                <div className="h-5 bg-black/10 dark:bg-white/10 rounded-md w-1/4"></div>
+            </div>
+        </li>
+    );
+}

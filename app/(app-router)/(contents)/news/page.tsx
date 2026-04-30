@@ -8,30 +8,25 @@ export default async function NewsPage(props: { searchParams: Promise<{ [key: st
     const searchParams = await props.searchParams;
     const page = searchParams?.page ? Number(searchParams.page) : 1;
 
-    const res = await fetchInternalEndpoint("GET", `/api/news?page=${page}`);
+    const response = await fetchInternalEndpoint("GET", `/api/news?page=${page}`);
+    const data = await response.json()
+    DevLog(`data:`, data);
 
-    DevLog(`res:`, res);
-
-    const newsData = NewsListSchema.safeParse(await res.json());
-
+    const newsData = NewsListSchema.safeParse(data);
     DevLog(`newsData:`, newsData);
 
     if (!newsData.success) {
         return <div>サーバ側でエラーが起きました。</div>;
     }
 
-
-
     return (
         <>
-            <main className="w-full md:max-w-7xl md:mx-auto rounded-xl bg-black/5 p-6 dark:bg-white/5 shadow-sm">
-                <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">ニュース</h2>
-                <ul>
-                    {newsData.data.map((news) => (
-                        <NewsItem key={news.id} title={news.title} created_at={news.created_at} url={`/news/${news.id}/view`} />
-                    ))}
-                </ul>
-            </main>
+            <h2 className="text-2xl font-bold mb-4 text-white">ニュース</h2>
+            <ul>
+                {newsData.data.map((news) => (
+                    <NewsItem key={news.id} title={news.title} created_at={news.created_at.split('T')[0]} url={`/news/${news.id}/view`} />
+                ))}
+            </ul>
         </>
     );
 }
