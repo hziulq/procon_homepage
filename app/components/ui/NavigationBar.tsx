@@ -10,7 +10,7 @@ export default function NavigationBar() {
                 <NavigationBarItem title="部員" url="/members" />
                 <NavigationBarItem title="スペシャル" url="/spesials" />
                 <NavigationBarItem title="アクセス" url="/access" />
-                <NavigationBarItem title="お問い合わせ" url="/contact" />
+                <NavigationBarItem title="コンタクト" url="/contact" />
             </ul>
         </nav>
     );

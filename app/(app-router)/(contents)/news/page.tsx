@@ -9,6 +9,7 @@ export default async function NewsPage(props: { searchParams: Promise<{ [key: st
     const page = searchParams?.page ? Number(searchParams.page) : 1;
 
     const response = await fetchInternalEndpoint("GET", `/api/news?page=${page}`);
+    DevLog(`response:`, response);
     const data = await response.json()
     DevLog(`data:`, data);
 
@@ -22,9 +23,16 @@ export default async function NewsPage(props: { searchParams: Promise<{ [key: st
     return (
         <>
             <h2 className="text-2xl font-bold mb-4 text-white">ニュース</h2>
-            <ul>
+            <ul className="flex flex-col gap-5">
                 {newsData.data.map((news) => (
-                    <NewsItem key={news.id} title={news.title} created_at={news.created_at.split('T')[0]} url={`/news/${news.id}/view`} />
+                    <li key={news.id}>
+                        <NewsItem
+                            title={news.title}
+                            created_at={news.created_at.split('T')[0]}
+                            url={`/news/${news.id}/view`}
+                            genre={news.genre}
+                        />
+                    </li>
                 ))}
             </ul>
         </>

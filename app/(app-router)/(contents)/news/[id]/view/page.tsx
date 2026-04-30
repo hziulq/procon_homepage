@@ -2,6 +2,7 @@ import { fetchInternalEndpoint } from "@/app/lib/fetch-internal-endpoint";
 import { NewsContentSchema } from "@/types/news";
 import DevLog from "@/app/lib/dev-log";
 import convertToHtml from "@/app/lib/convert-to-html";
+import "./content-container.css";
 
 export default async function NewsViewPage({ params }: { params: Promise<{ id: string }> }) {
 
@@ -29,7 +30,10 @@ export default async function NewsViewPage({ params }: { params: Promise<{ id: s
         <>
             <h1 className="pb-10 pt-3 text-2xl font-bold">{news.title}</h1>
             <p className="font-medium">投稿日: {news.created_at.split("T")[0]}</p>
-            <div dangerouslySetInnerHTML={{ __html: safehtmlContent }} />
+            <div
+                id="content-container"
+                dangerouslySetInnerHTML={{ __html: safehtmlContent }}
+            />
         </>
     );
 }

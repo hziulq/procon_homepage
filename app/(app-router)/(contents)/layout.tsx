@@ -11,7 +11,7 @@ export default function RootLayout({
     <>
       <Header title={process.env.TITLE || ""} />
       <NavigationBar />
-      <main className="w-full md:max-w-7xl md:mx-auto rounded-xl bg-black/40 p-6 shadow-sm">
+      <main className="w-full md:max-w-7xl md:mx-auto rounded-xl bg-black/60 p-6 shadow-sm">
         {children}
       </main>
       <Footer />
