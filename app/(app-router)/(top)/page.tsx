@@ -42,9 +42,9 @@ export default async function Home() {
             </main>
             <aside className="w-full md:w-80 rounded-xl bg-black/5 p-6 dark:bg-white/5 shadow-sm">
                 <div className="flex flex-col gap-4">
-                    <ImageMap title="コンタクト" image="/images/contact.png" link="/contact" />
+                    <ImageMap title="コンタクト" image="https://pjanndqpkhbskfeqdnhm.supabase.co/storage/v1/object/public/procon_public/images/contact.png" link="/contact" />
                     {/* <ImageMap title="プロダクト" image="/images/product.png" link="/product" /> */}
-                    <ImageMap title="リクルート" image="/images/recruit.png" link="/recruit" />
+                    <ImageMap title="リクルート" image="https://pjanndqpkhbskfeqdnhm.supabase.co/storage/v1/object/public/procon_public/images/recruit.png" link="/recruit" />
                 </div>
             </aside>
         </div>

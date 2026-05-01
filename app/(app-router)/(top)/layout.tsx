@@ -9,7 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <Header title={process.env.TITLE || ""} heroImage={process.env.HEROIMAGE || null} />
+      <Header title={process.env.TITLE || ""} heroImage={""} />
       <NavigationBar />
       {children}
       <Footer />

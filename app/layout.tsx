@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: process.env.DESCRIPTION || "",
 };
 
-const backgroundImageUrl = process.env.BACKGROUND_IMAGE_URL || "/images/background1.png";
+const backgroundImageUrl = "https://pjanndqpkhbskfeqdnhm.supabase.co/storage/v1/object/public/procon_public/images/background.png"
 
 export default function RootLayout({
   children,
